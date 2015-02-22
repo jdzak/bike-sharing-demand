@@ -23,15 +23,12 @@ for i = 2:p
        end
 
 % if there exists any zeros in y then the log(y) and 1/y won't work.  
-% First we do a check 
-if all(y(:,1)==0
-	% add Exponential model
-	y_trans = [y_trans log(y)];
-	% add Reciprocal model
-	y_trans = [y_trans 1./y];
-      endif
+% So we add '1' to it to make sure
 
-
+% add Exponential model
+y_trans = [y_trans log(y+1)];
+% add Reciprocal model
+y_trans = [y_trans 1./(y+1)];
 
 
 % =========================================================================
