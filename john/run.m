@@ -1,6 +1,7 @@
 % Efficiencies:
-% * Use Date (date = datevec(out{1});)
-% * Don't round temp
+% * Use Date (date = datenum(out{1});)
+% * Don't use abs(answers)
+% * Try different model for binary data (1 or 0)
 %
 %% ================ Part 1: Feature Normalization ================
 
@@ -89,7 +90,8 @@ X = [ones(m, 1) X];
 
 %% ================ Part 4: Guess Answers ================
 
-answers = X * theta;
+% Make sure no negative answers
+answers = abs(X * theta);
 
 % Print out some answers
 fprintf('First 10 answers: \n');
@@ -97,8 +99,4 @@ fprintf(' answers = %d \n', [answers(1:10,:)']);
 
 %% ================ Part 5: Write Answers ================
 
-filename = 'answers.txt';
-% fid = fopen(filename, 'w');
-% fputs(fid, answers);
-csvwrite(filename, answers);
-% fclose(fid);
+csvwrite('answers.txt', answers);
