@@ -41,18 +41,18 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.03;
-num_iters = 400;
+alpha = 0.01;
+num_iters = 800;
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(size(X, 2), 1);
 [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
 
 % Plot the convergence graph
-% figure;
-% plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
-% xlabel('Number of iterations');
-% ylabel('Cost J');
+figure;
+plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+xlabel('Number of iterations');
+ylabel('Cost J');
 
 % Display gradient descent's result
 fprintf('Theta computed from gradient descent: \n');
@@ -91,7 +91,11 @@ X = [ones(m, 1) X];
 %% ================ Part 4: Guess Answers ================
 
 % Make sure no negative answers
-answers = abs(X * theta);
+answers = X * theta;
+indices = find(answers < 0);
+answers(indices) = 0;
+answers = uint32(answers);
+
 
 % Print out some answers
 fprintf('First 10 answers: \n');
