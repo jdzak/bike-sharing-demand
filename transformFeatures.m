@@ -9,7 +9,7 @@ function [y_trans] = transfromFeatures(y,p)
 
 % You need to return the following variables correctly.
 m = length(y);
-y_trans = zeros(numel(y),3);
+%y_trans = zeros(numel(y),p+2);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Given a vector X, return a matrix X_poly where the p-th 
@@ -19,8 +19,8 @@ y_trans = zeros(numel(y),3);
 y_trans = y;
 % add Quadratic model
 for i = 2:p
-          y_trans = [y_trans y_trans.^(1/p)];
-       end
+          y_trans = [y_trans y.^(1/i)];
+       endfor
 
 % if there exists any zeros in y then the log(y) and 1/y won't work.  
 % So we add '1' to it to make sure
